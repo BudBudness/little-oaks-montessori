@@ -2,6 +2,9 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import "./index.css"
 
+const whatsappPrimary = "256705074279"
+const whatsappSecondary = "256762023393"
+
 function App() {
   return (
     <>
@@ -17,34 +20,12 @@ function App() {
               A warm Montessori environment where children grow into confident,
               independent, and compassionate learners.
             </p>
+
             <div className="hero-actions">
               <a href="#admissions" className="btn primary">Start Admissions</a>
-              <a href="#contact" className="btn secondary">Contact Us</a>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="section">
-          <p className="eyebrow">Our Approach</p>
-          <h2>Child-centered learning with purpose</h2>
-          <p>
-            Little Oaks Montessori Daycare & Kindergarten nurtures independence,
-            curiosity, confidence, practical life skills, and early academic growth
-            through the Montessori philosophy.
-          </p>
-
-          <div className="grid">
-            <div className="card">
-              <h3>Montessori Method</h3>
-              <p>Hands-on learning that supports naming, recognition, recall, and independence.</p>
-            </div>
-            <div className="card">
-              <h3>Safe Environment</h3>
-              <p>A caring, respectful, and structured space for children aged 2–6 years.</p>
-            </div>
-            <div className="card">
-              <h3>Ugandan Context</h3>
-              <p>Learning experiences rooted in family, nature, community, and local culture.</p>
+              <a href={`https://wa.me/${whatsappPrimary}`} className="btn secondary">
+                WhatsApp Us
+              </a>
             </div>
           </div>
         </section>
@@ -52,24 +33,88 @@ function App() {
         <section id="admissions" className="section highlight">
           <p className="eyebrow">Admissions</p>
           <h2>Enrollment is open</h2>
-          <p>
-            We welcome children aged 2–6 years. Parents may contact the school office
-            to begin registration and receive admission guidance.
-          </p>
-          <a href="#contact" className="btn primary">Request Admission Information</a>
+          <p>Complete the form and send directly via WhatsApp.</p>
+
+          <form
+            className="admission-form"
+            onSubmit={(e) => {
+              e.preventDefault()
+
+              const form = e.target
+              const parent = form.parent.value
+              const child = form.child.value
+              const age = form.age.value
+              const phone = form.phone.value
+              const message = form.message.value
+
+              const text = `Admission Request:%0A
+Parent: ${parent}%0A
+Child: ${child}%0A
+Age: ${age}%0A
+Phone: ${phone}%0A
+Message: ${message}`
+
+              window.open(`https://wa.me/${whatsappPrimary}?text=${text}`, "_blank")
+            }}
+          >
+            <label>
+              Parent/Guardian Name
+              <input name="parent" required />
+            </label>
+
+            <label>
+              Child's Name
+              <input name="child" required />
+            </label>
+
+            <label>
+              Child's Age
+              <select name="age" required>
+                <option value="">Select age</option>
+                <option>2 years</option>
+                <option>3 years</option>
+                <option>4 years</option>
+                <option>5 years</option>
+                <option>6 years</option>
+              </select>
+            </label>
+
+            <label>
+              Phone Number
+              <input name="phone" required />
+            </label>
+
+            <label>
+              Message
+              <textarea name="message" />
+            </label>
+
+            <button className="btn form-btn">
+              Send via WhatsApp
+            </button>
+          </form>
         </section>
 
         <section id="contact" className="section contact">
-          <p className="eyebrow">Contact</p>
-          <h2>Visit or call us</h2>
+          <h2>Contact Us</h2>
           <div className="contact-box">
             <p><strong>Location:</strong> Katete, Mbarara, Uganda</p>
             <p><strong>Phone:</strong> +256 762 023393</p>
-            <p><strong>WhatsApp:</strong> +254 700 466480</p>
+            <p><strong>WhatsApp 1:</strong> +256 705 074279</p>
+            <p><strong>WhatsApp 2:</strong> +256 762 023393</p>
             <p><strong>Email:</strong> admin@littleoaksmontessori.ac.ug</p>
           </div>
         </section>
       </main>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        className="whatsapp-float"
+        href={`https://wa.me/${whatsappPrimary}`}
+        target="_blank"
+      >
+        WhatsApp
+      </a>
 
       <Footer />
     </>
