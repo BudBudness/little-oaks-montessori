@@ -3,31 +3,33 @@ import { useState } from "react"
 function Navbar() {
   const [open, setOpen] = useState(false)
 
-  const closeMenu = () => setOpen(false)
-
   return (
     <>
       <header className="topbar">
-        <div className="brand-mark">LO</div>
-        <div className="brand-text">Little Oaks Montessori</div>
+        <a href="#home" className="brand">
+          <span className="brand-icon">LO</span>
+          <span>Little Oaks Montessori</span>
+        </a>
+
         <button className="menu-button" onClick={() => setOpen(true)}>
           ☰
         </button>
       </header>
 
       <aside className={open ? "sidebar open" : "sidebar"}>
-        <div className="brand-mark large">LO</div>
+        <div className="sidebar-logo">LO</div>
         <h2>Little Oaks Montessori</h2>
+        <p>Daycare & Kindergarten</p>
 
         <nav>
-          <a onClick={closeMenu} href="#home">Home</a>
-          <a onClick={closeMenu} href="#about">About</a>
-          <a onClick={closeMenu} href="#admissions">Admissions</a>
-          <a onClick={closeMenu} href="#contact">Contact</a>
+          <a onClick={() => setOpen(false)} href="#home">Home</a>
+          <a onClick={() => setOpen(false)} href="#about">About</a>
+          <a onClick={() => setOpen(false)} href="#admissions">Admissions</a>
+          <a onClick={() => setOpen(false)} href="#contact">Contact</a>
         </nav>
       </aside>
 
-      {open && <div className="overlay" onClick={closeMenu}></div>}
+      {open && <div className="overlay" onClick={() => setOpen(false)}></div>}
     </>
   )
 }
